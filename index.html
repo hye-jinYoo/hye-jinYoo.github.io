@@ -140,18 +140,29 @@
         </main>
     </div>
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-    // 썸네일(.pr_img) 클릭하면 팝업 열기
-    $(".pr_img").click(function() {
-        $(this).closest(".project-item").addClass("active");
-    });
+    $(function(){
+        // 썸네일 클릭 → 팝업 열기
+        $(".pr_img").on("click", function() {
+            $(this).closest(".project-item").addClass("active");
+        });
 
-    // X 버튼(.btn_close) 클릭하면 팝업 닫기
-    // '제자리 팝업'에서는 바깥을 누르는 기능이 없으므로, X버튼만으로 닫습니다.
-    $(".btn_close").click(function(e) {
-        e.stopPropagation();
-        $(this).closest(".project-item").removeClass("active");
+        // 닫기 버튼 클릭 → 팝업 닫기
+        $(".btn_close").on("click", function(e) {
+            e.stopPropagation();
+            $(this).closest(".project-item").removeClass("active");
+        });
+
+        // 팝업 바깥 클릭 → 닫기
+        $(".new_img").on("click", function() {
+            $(this).closest(".project-item").removeClass("active");
+        });
+
+        // 안쪽(inner) 클릭은 닫기 이벤트 막기
+        $(".new_img .inner").on("click", function(e) {
+            e.stopPropagation();
+        });
     });
 </script>
 </body>
